@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+    <head>
+    <title>FruityChat!</title>
+    <link rel="icon" href ="appleicon.png.ico" />
+    <link rel="stylesheet" href="style.css">
+    </head>
+    
+    <body>
+        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+
+    <div class="output">
+          <section class="chat">
+              <div class="messages header"><img src="peachicon.png" width="2%" height="2%"> You're <span id="username"></span>.</div>
+              <ul class="messages content scroll"></ul>
+          </section>
+
+          <section class="sidebar">
+              <link rel="icon" href ="appleicon.png.ico" />
+              <div class="users header"><img src="pineappleicon.png" width="7%" height="7%">Online users:</div>
+              <div class="users content scroll">Online users</div>
+          </section>
+    </div>
+    
+    <form action="">
+        <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+	
+    <script>
+        $(function() {
+            var socket = io();
+            var id = null;
+            
+            // Create the cookies needed
+            // https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+			//
+            function update(userData) {
+                document.cookie = "id=" + userData.id;
+                document.cookie = "name=" + userData.name;
+                document.cookie = "color=" + userData.color;
+
+                id = userData.id;
+                $('#username').text(userData.name);
+            };
+
+			//connect and get data
+			socket.on('connected', (userData) => {
+				update(userData);
+				$('.messages.content').empty();
+				$('.messages.content').append($('<li>'));
+			});
+
+			//check update for username and usercolor
+			socket.on('update', (userData) => {
+				update(userData);
+			});
+			
+			//Messages from server
+			$('form').submit( () => {
+				socket.emit('chat message', $('#m').val());
+				$('#m').val('');
+				return false;
+			});
+
+			//Show chat message with formatting
+			socket.on('chat message', (msg) => {
+				let date = new Date(msg.time);
+				let time = ('0' + date.getHours()).substr(-2) + ':' + ('0' + date.getMinutes()).substr(-2) + ':' + ('0' + date.getSeconds()).substr(-2);
+				
+				// color name
+				let uname = $('<span>').text(msg.uname).css("color", msg.color);
+
+				let li = $('<li>');
+				li.append(time + " ");
+				li.append(uname);
+				li.append(": " + msg.txt);
+
+				if (msg.uid == id) {
+					li.wrapInner('<b>');
+				}
+				$('.messages.content').append(li);
+				$('.messages.content').scrollTop($('.messages.content')[0].scrollHeight);
+			});
+
+			// reload user list
+			socket.on('update users', (users) => {
+				$('.users.content').empty();
+				for (u of users) {
+					$('.users.content').append($('<li>').text(u));
+				}
+			});
+		});
+	</script>	
+  </body>
+</html>

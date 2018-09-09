@@ -1,0 +1,140 @@
+/*
+James Raleigh
+10150801
+SENG 513 A1
+H. Pereira
+*/
+
+body, div, h1, h2, h3, h4, h5, h6, p, ul, img {margin:0px; padding:0px;}
+    
+body { 
+    font-family: "Times New Roman", Times, serif; 
+    background-color: lightslategrey;
+}
+
+#headerIcon{
+    background: url(images/empire_insignia.png) no-repeat;
+    background-size: contain;
+    height: 150px;
+    width: 200px;
+    float:left;
+}
+
+#tagline {
+    padding-top: 60px;
+}
+#tagline h2{
+    font-size: 40px;
+}
+
+ul#menu {
+    list-style: none;
+    padding-top: 10px;
+}
+ul#menu li{
+    float:left;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+ul#menu li a{
+    font-size: 30px;
+    color: crimson;
+    text-decoration:underline;
+}
+
+#main .container{
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    background-color: rgb(240, 240, 240)
+}
+
+#sidebar {
+    float: left;
+    margin-left:10px;
+    margin-top:35px;
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-top: 40px;
+    padding-bottom: 50px;
+    background-color:dimgray;
+    border: 2px solid black;
+}
+
+#sidebar ul{
+    list-style: none;
+    padding-bottom: 10px;
+}
+
+#sidebar ul li a{
+    font-size: 20px;
+    color: red;
+}
+
+#sidebar h3{
+    padding-bottom: 10px;
+    color: white;
+}
+
+#content {
+    width: 750px;
+    padding-left: 30px;
+    float: left;
+    padding-bottom: 30px;
+}
+
+#content h3 {
+    font-size: 24px;
+    color: black;
+    padding-top: 20px;
+    padding-bottom:5px;
+}
+
+#content h4 {
+    font-size: 20px;
+    color: #373745;
+    padding-top: 5px;
+    padding-left: 15px;
+}
+
+#content p {
+    font-size: 16px;
+    color: #595855; 
+    padding-left: 15px;
+}
+
+#content a {
+    color: mediumpurple;
+    font-weight: bold;
+    text-decoration: none; 
+}
+
+#news {
+    padding-top: 10px;
+}
+
+#news h3{
+    padding-bottom: 5px;
+}
+
+#news p{
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+#footer .container{
+    width: auto;
+    margin: 0 auto;
+    background-color: black;
+}
+
+table, th, td{
+    border: 2px solid black;
+    border-collapse:collapse;
+    
+    
+}
+
+#footer{
+    color: white;
+}
